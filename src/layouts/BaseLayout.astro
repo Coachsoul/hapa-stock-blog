@@ -1,0 +1,77 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  keywords?: string[];
+  image?: string;
+  article?: boolean;
+}
+
+const {
+  title,
+  description = '주식 투자 초보자를 위한 매일 투자 가이드 - 하파와 함께 주식 부자 되기',
+  keywords = [],
+  image,
+  article = false,
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const fullTitle = title === '홈'
+  ? '하파 주식 투자 가이드 - 매일 시장 분석과 초보자 맞춤 전략'
+  : `${title} | 하파 주식 투자 가이드`;
+---
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{fullTitle}</title>
+  <meta name="description" content={description} />
+  {keywords.length > 0 && <meta name="keywords" content={keywords.join(', ')} />}
+  <link rel="canonical" href={canonicalURL} />
+
+  <!-- Pretendard Font -->
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+
+  <!-- Material Symbols -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+
+  <!-- Open Graph -->
+  <meta property="og:title" content={fullTitle} />
+  <meta property="og:description" content={description} />
+  <meta property="og:type" content={article ? 'article' : 'website'} />
+  <meta property="og:url" content={canonicalURL} />
+  <meta property="og:locale" content="ko_KR" />
+  <meta property="og:site_name" content="하파 주식 투자 가이드" />
+  {image && <meta property="og:image" content={new URL(image, Astro.site)} />}
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={fullTitle} />
+  <meta name="twitter:description" content={description} />
+
+  <!-- JSON-LD: Organization -->
+  {!article && (
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "하파 주식 투자 가이드",
+      "url": Astro.site?.toString(),
+      "description": "주식 투자 초보자를 위한 매일 투자 가이드",
+      "founder": { "@type": "Person", "name": "하파" },
+    })} />
+  )}
+</head>
+<body class="bg-bg font-sans text-text min-h-screen flex flex-col">
+  <Header />
+
+  <slot />
+
+  <Footer />
+</body>
+</html>

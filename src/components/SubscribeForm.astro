@@ -1,0 +1,82 @@
+---
+interface Props {
+  variant?: 'inline' | 'card';
+}
+
+const { variant = 'card' } = Astro.props;
+---
+
+<div class={variant === 'card' ? 'bg-primary-light/50 border border-primary/20 rounded-xl p-6 my-8' : ''}>
+  {variant === 'card' && (
+    <div class="mb-4">
+      <h3 class="text-lg font-bold text-text mb-1">매일 아침, 투자 노트가 도착합니다</h3>
+      <p class="text-sm text-text-secondary">
+        하파의 일일 투자 노트를 무료로 구독하시면 매일 아침 시장 분석과 맞춤 투자 전략을 이메일로 받아보실 수 있습니다.
+      </p>
+    </div>
+  )}
+
+  <form class="flex flex-col sm:flex-row gap-2" id="subscribe-form">
+    <input
+      type="email"
+      name="email"
+      placeholder="이메일 주소를 입력하세요"
+      required
+      autocomplete="email"
+      class="flex-1 px-4 py-2.5 rounded-lg border border-border bg-bg text-sm text-text placeholder:text-text-muted focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary"
+    />
+    <button type="submit" class="px-5 py-2.5 rounded-lg bg-primary text-white text-sm font-bold hover:bg-primary-dark transition-colors whitespace-nowrap">
+      <span class="btn-text">무료 구독</span>
+      <span class="btn-loading" hidden>구독 중...</span>
+    </button>
+  </form>
+  <p class="hidden mt-2 text-sm" id="subscribe-message"></p>
+  <p class="text-xs text-text-muted mt-2">스팸 없이 투자 정보만 발송합니다. 언제든 구독 해지 가능합니다.</p>
+</div>
+
+<script>
+  const form = document.getElementById('subscribe-form') as HTMLFormElement;
+  const msg = document.getElementById('subscribe-message') as HTMLElement;
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email = new FormData(form).get('email') as string;
+    const btnText = form.querySelector('.btn-text') as HTMLElement;
+    const btnLoading = form.querySelector('.btn-loading') as HTMLElement;
+    const btn = form.querySelector('button') as HTMLButtonElement;
+
+    btn.disabled = true;
+    btnText.hidden = true;
+    btnLoading.hidden = false;
+
+    try {
+      const apiUrl = import.meta.env.PUBLIC_API_URL || '';
+      const res = await fetch(`${apiUrl}/api/subscribers`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, tier: 'free' }),
+      });
+      const data = await res.json();
+
+      msg.hidden = false;
+      msg.classList.remove('hidden');
+      if (res.ok) {
+        msg.textContent = '구독 완료! 내일 아침부터 투자 노트를 받아보실 수 있습니다.';
+        msg.className = 'mt-2 text-sm text-emerald-600';
+        form.reset();
+      } else {
+        msg.textContent = data.error || '구독 처리 중 문제가 발생했습니다.';
+        msg.className = 'mt-2 text-sm text-red-500';
+      }
+    } catch {
+      msg.hidden = false;
+      msg.classList.remove('hidden');
+      msg.textContent = '서버에 연결할 수 없습니다. 잠시 후 다시 시도해주세요.';
+      msg.className = 'mt-2 text-sm text-red-500';
+    } finally {
+      btn.disabled = false;
+      btnText.hidden = false;
+      btnLoading.hidden = true;
+    }
+  });
+</script>

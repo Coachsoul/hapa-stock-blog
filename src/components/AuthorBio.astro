@@ -1,0 +1,25 @@
+---
+interface Props {
+  compact?: boolean;
+}
+const { compact = false } = Astro.props;
+---
+
+<div class={`flex items-start gap-4 ${compact ? 'py-4' : 'bg-bg-secondary border border-border rounded-xl p-6 my-8'}`}>
+  <div class="flex-shrink-0 size-12 rounded-full bg-primary-light text-primary flex items-center justify-center text-lg font-bold">
+    하
+  </div>
+  <div class="flex-1 min-w-0">
+    <h4 class="font-bold text-text">하파 (HAPA)</h4>
+    {!compact && (
+      <p class="text-sm text-text-secondary mt-1 leading-relaxed">
+        매일 아침 시장을 분석하고 초보 투자자의 눈높이에서 투자 전략을 전달합니다.
+        주식이 두려운 분들에게 힘과 용기를 드리고, 함께 주식 부자가 되어봅시다.
+      </p>
+    )}
+    <div class="flex gap-2 mt-3">
+      <a href="/subscribe" class="text-xs font-medium px-3 py-1.5 rounded-lg bg-primary text-white hover:bg-primary-dark transition-colors">무료 구독</a>
+      <a href="/vip" class="text-xs font-medium px-3 py-1.5 rounded-lg border border-vip-gold text-vip-gold hover:bg-accent-light transition-colors">VIP 구독</a>
+    </div>
+  </div>
+</div>

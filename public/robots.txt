@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://hapa-stock.vercel.app/sitemap-index.xml

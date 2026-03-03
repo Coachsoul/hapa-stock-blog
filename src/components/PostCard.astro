@@ -1,0 +1,50 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  pubDate: Date;
+  tags?: string[];
+  category?: string;
+  readingTime?: number;
+  slug: string;
+}
+
+const { title, description, pubDate, tags = [], category, readingTime, slug } = Astro.props;
+const dateStr = pubDate.toLocaleDateString('ko-KR', { year: 'numeric', month: 'long', day: 'numeric' });
+
+const categoryColors: Record<string, string> = {
+  '시장분석': 'bg-primary-light text-primary',
+  '종목분석': 'bg-violet-50 text-violet-800',
+  '투자전략': 'bg-accent-light text-accent',
+  '경제기초': 'bg-teal-50 text-teal-800',
+};
+const defaultCatColor = 'bg-surface text-text-secondary';
+---
+
+<a href={`/posts/${slug}`} class="group block bg-bg rounded-xl border border-border hover:border-primary/30 hover:shadow-md transition-all p-6">
+  <div class="flex items-center gap-2 mb-3">
+    {category && (
+      <span class={`px-2 py-0.5 rounded text-xs font-semibold ${categoryColors[category] || defaultCatColor}`}>
+        {category}
+      </span>
+    )}
+    <span class="text-xs text-text-muted">{dateStr}</span>
+    {readingTime && <span class="text-xs text-text-muted">&middot; {readingTime}분</span>}
+  </div>
+
+  <h3 class="text-lg font-bold mb-2 text-text group-hover:text-primary transition-colors line-clamp-2">
+    {title}
+  </h3>
+
+  <p class="text-text-secondary text-sm leading-relaxed line-clamp-2">
+    {description}
+  </p>
+
+  {tags.length > 0 && (
+    <div class="flex flex-wrap gap-1.5 mt-4">
+      {tags.slice(0, 3).map(tag => (
+        <span class="text-xs text-text-muted bg-surface px-2 py-0.5 rounded">#{tag}</span>
+      ))}
+    </div>
+  )}
+</a>

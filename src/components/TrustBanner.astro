@@ -1,0 +1,36 @@
+---
+interface Props {
+  variant?: 'full' | 'compact';
+}
+const { variant = 'compact' } = Astro.props;
+---
+
+{variant === 'full' ? (
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-4 my-8">
+    <div class="text-center p-4 bg-bg-secondary rounded-lg">
+      <span class="material-symbols-outlined text-2xl text-primary mb-1">monitoring</span>
+      <p class="text-sm font-medium text-text">매일 시장 분석</p>
+      <p class="text-xs text-text-muted">주 5회 발행</p>
+    </div>
+    <div class="text-center p-4 bg-bg-secondary rounded-lg">
+      <span class="material-symbols-outlined text-2xl text-primary mb-1">school</span>
+      <p class="text-sm font-medium text-text">초보자 맞춤</p>
+      <p class="text-xs text-text-muted">쉬운 설명</p>
+    </div>
+    <div class="text-center p-4 bg-bg-secondary rounded-lg">
+      <span class="material-symbols-outlined text-2xl text-primary mb-1">verified</span>
+      <p class="text-sm font-medium text-text">근거 기반 분석</p>
+      <p class="text-xs text-text-muted">출처 명시</p>
+    </div>
+    <div class="text-center p-4 bg-bg-secondary rounded-lg">
+      <span class="material-symbols-outlined text-2xl text-primary mb-1">mail</span>
+      <p class="text-sm font-medium text-text">무료 구독</p>
+      <p class="text-xs text-text-muted">이메일 발송</p>
+    </div>
+  </div>
+) : (
+  <div class="bg-accent-light border border-accent/20 rounded-lg px-4 py-3 my-8 text-sm text-accent">
+    본 콘텐츠는 투자 참고용이며, 최종 투자 결정은 투자자 본인의 판단에 따라 이루어져야 합니다.
+    과거 수익률이 미래 수익을 보장하지 않습니다.
+  </div>
+)}

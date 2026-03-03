@@ -1,0 +1,47 @@
+---
+import { getCollection } from 'astro:content';
+
+interface Props {
+  currentSlug: string;
+  tags: string[];
+  category?: string;
+  limit?: number;
+}
+
+const { currentSlug, tags, category, limit = 3 } = Astro.props;
+
+const allPosts = await getCollection('posts');
+
+const scored = allPosts
+  .filter(p => p.id !== currentSlug)
+  .map(post => {
+    let score = 0;
+    if (category && post.data.category === category) score += 2;
+    for (const tag of tags) {
+      if (post.data.tags.includes(tag)) score += 1;
+    }
+    return { post, score };
+  })
+  .filter(s => s.score > 0)
+  .sort((a, b) => b.score - a.score || new Date(b.post.data.pubDate).getTime() - new Date(a.post.data.pubDate).getTime())
+  .slice(0, limit);
+---
+
+{scored.length > 0 && (
+  <section class="my-10">
+    <h3 class="text-lg font-bold text-text mb-4">관련 글</h3>
+    <div class="grid gap-3">
+      {scored.map(({ post }) => {
+        const dateStr = post.data.pubDate.toLocaleDateString('ko-KR', {
+          month: 'long', day: 'numeric'
+        });
+        return (
+          <a href={`/posts/${post.id}`} class="flex items-center gap-4 p-4 rounded-lg border border-border hover:border-primary/30 hover:bg-bg-secondary transition-colors">
+            <span class="text-sm text-text-muted whitespace-nowrap">{dateStr}</span>
+            <span class="text-sm font-medium text-text">{post.data.title}</span>
+          </a>
+        );
+      })}
+    </div>
+  </section>
+)}

@@ -1,0 +1,20 @@
+<div class="fixed top-0 left-0 w-full h-0.5 z-[100]" id="reading-progress" aria-hidden="true">
+  <div class="h-full bg-primary w-0 transition-[width] duration-100" id="reading-progress-bar"></div>
+</div>
+
+<script>
+  const bar = document.getElementById('reading-progress-bar');
+  const article = document.querySelector('.post-content') || document.querySelector('article');
+
+  if (bar && article) {
+    const update = () => {
+      const rect = article.getBoundingClientRect();
+      const total = rect.height;
+      const scrolled = Math.max(0, -rect.top);
+      const pct = Math.min(100, (scrolled / (total - window.innerHeight)) * 100);
+      bar.style.width = `${pct}%`;
+    };
+    window.addEventListener('scroll', update, { passive: true });
+    update();
+  }
+</script>

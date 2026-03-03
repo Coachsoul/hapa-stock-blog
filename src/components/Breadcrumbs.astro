@@ -1,0 +1,38 @@
+---
+interface BreadcrumbItem {
+  label: string;
+  href?: string;
+}
+
+interface Props {
+  items: BreadcrumbItem[];
+}
+
+const { items } = Astro.props;
+
+const schemaData = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": items.map((item, i) => ({
+    "@type": "ListItem",
+    "position": i + 1,
+    "name": item.label,
+    ...(item.href ? { "item": new URL(item.href, Astro.site).toString() } : {}),
+  })),
+};
+---
+
+<nav class="flex items-center gap-1.5 text-sm text-text-muted mb-6" aria-label="경로">
+  {items.map((item, i) => (
+    <>
+      {item.href && i < items.length - 1 ? (
+        <a href={item.href} class="hover:text-primary transition-colors">{item.label}</a>
+      ) : (
+        <span class={i === items.length - 1 ? 'text-text-secondary font-medium' : ''} aria-current={i === items.length - 1 ? 'page' : undefined}>{item.label}</span>
+      )}
+      {i < items.length - 1 && <span aria-hidden="true">/</span>}
+    </>
+  ))}
+</nav>
+
+<script type="application/ld+json" set:html={JSON.stringify(schemaData)} />

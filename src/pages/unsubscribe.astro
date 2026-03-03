@@ -1,0 +1,85 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="구독 해지" description="하파 주식 투자 가이드 구독을 해지합니다.">
+  <main class="container" style="max-width:500px;">
+    <div style="text-align:center;padding:48px 0;">
+      <h1 style="font-size:28px;font-weight:800;margin-bottom:12px;">구독 해지</h1>
+      <p style="color:var(--text-secondary);margin-bottom:32px;">
+        정말 떠나시나요? 구독 해지를 원하시면 아래에 이메일 주소를 입력해주세요.
+      </p>
+
+      <form id="unsubscribe-form" style="max-width:400px;margin:0 auto;">
+        <div class="form-row">
+          <input
+            type="email"
+            name="email"
+            placeholder="이메일 주소를 입력하세요"
+            required
+            autocomplete="email"
+            style="flex:1;padding:12px 16px;border:1px solid var(--border);border-radius:8px;font-size:14px;font-family:inherit;"
+          />
+          <button
+            type="submit"
+            style="padding:12px 20px;background:var(--error);color:white;border:none;border-radius:8px;font-weight:700;font-size:14px;cursor:pointer;font-family:inherit;"
+          >
+            해지
+          </button>
+        </div>
+        <p id="unsub-message" hidden style="margin-top:12px;font-size:13px;padding:8px 12px;border-radius:6px;"></p>
+      </form>
+
+      <div style="margin-top:48px;padding:24px;background:var(--bg-secondary);border-radius:12px;">
+        <h3 style="margin-bottom:8px;font-size:16px;">다시 돌아오실 수 있습니다</h3>
+        <p style="font-size:14px;color:var(--text-secondary);margin-bottom:16px;">
+          언제든 다시 구독하시면 매일 아침 투자 노트를 받아보실 수 있습니다.
+        </p>
+        <a href="/subscribe" class="cta-btn">다시 구독하기</a>
+      </div>
+    </div>
+  </main>
+</BaseLayout>
+
+<script>
+  const form = document.getElementById('unsubscribe-form') as HTMLFormElement;
+  const msg = document.getElementById('unsub-message') as HTMLElement;
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email = new FormData(form).get('email') as string;
+    const btn = form.querySelector('button') as HTMLButtonElement;
+    btn.disabled = true;
+    btn.textContent = '처리 중...';
+
+    try {
+      const apiUrl = import.meta.env.PUBLIC_API_URL || '';
+      const res = await fetch(`${apiUrl}/api/subscribers/unsubscribe`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      });
+      const data = await res.json();
+
+      msg.hidden = false;
+      if (res.ok) {
+        msg.textContent = '구독이 해지되었습니다. 그동안 감사했습니다.';
+        msg.style.background = 'var(--success-bg)';
+        msg.style.color = 'var(--success)';
+        form.reset();
+      } else {
+        msg.textContent = data.error || '처리 중 문제가 발생했습니다.';
+        msg.style.background = 'var(--error-bg)';
+        msg.style.color = 'var(--error)';
+      }
+    } catch {
+      msg.hidden = false;
+      msg.textContent = '서버에 연결할 수 없습니다. 잠시 후 다시 시도해주세요.';
+      msg.style.background = 'var(--error-bg)';
+      msg.style.color = 'var(--error)';
+    } finally {
+      btn.disabled = false;
+      btn.textContent = '해지';
+    }
+  });
+</script>

@@ -1,0 +1,53 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import PostCard from '../../components/PostCard.astro';
+import CategoryNav from '../../components/CategoryNav.astro';
+
+export function getStaticPaths() {
+  return ['시장분석', '종목분석', '투자전략', '경제기초'].map(category => ({
+    params: { category },
+    props: { category },
+  }));
+}
+
+const { category } = Astro.props;
+
+const posts = (await getCollection('posts'))
+  .filter(p => p.data.category === category)
+  .sort((a, b) => new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime());
+
+const categoryDescriptions: Record<string, string> = {
+  '시장분석': '코스피/코스닥 시장 흐름, 거시경제 분석, 글로벌 이슈가 한국 시장에 미치는 영향',
+  '종목분석': '개별 종목의 펀더멘털 분석, 실적 리뷰, 섹터 동향',
+  '투자전략': '포트폴리오 전략, 자산배분, 매매 타이밍, 리스크 관리',
+  '경제기초': '투자 초보자를 위한 경제/금융 용어 해설, 기본 개념 교육',
+};
+---
+
+<BaseLayout title={`${category} 글 모음`} description={categoryDescriptions[category]}>
+  <main class="flex-grow max-w-6xl mx-auto px-6 py-10">
+    <h1 class="text-2xl font-extrabold text-text mb-2">{category}</h1>
+    <p class="text-text-secondary mb-8">{categoryDescriptions[category]}</p>
+
+    <CategoryNav current={category} />
+
+    {posts.length === 0 ? (
+      <p class="text-center text-text-muted py-16">이 카테고리에 아직 글이 없습니다.</p>
+    ) : (
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        {posts.map(post => (
+          <PostCard
+            title={post.data.title}
+            description={post.data.description}
+            pubDate={post.data.pubDate}
+            tags={post.data.tags}
+            category={post.data.category}
+            readingTime={post.data.readingTime}
+            slug={post.id}
+          />
+        ))}
+      </div>
+    )}
+  </main>
+</BaseLayout>

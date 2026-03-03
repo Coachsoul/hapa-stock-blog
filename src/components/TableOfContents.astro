@@ -1,0 +1,72 @@
+---
+interface Props {
+  headings: { depth: number; slug: string; text: string }[];
+}
+
+const { headings } = Astro.props;
+const tocItems = headings.filter(h => h.depth === 2 || h.depth === 3);
+---
+
+{tocItems.length > 0 && (
+  <aside class="hidden lg:block" id="toc">
+    <div class="sticky top-24">
+      <button class="flex items-center justify-between w-full text-sm font-bold text-text mb-3 lg:cursor-default" id="toc-toggle" aria-expanded="true">
+        <span>목차</span>
+        <svg class="lg:hidden w-4 h-4" viewBox="0 0 16 16" fill="none">
+          <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <nav id="toc-nav">
+        <ul class="space-y-1 border-l border-border pl-3">
+          {tocItems.map(heading => (
+            <li class={heading.depth === 3 ? 'ml-3' : ''}>
+              <a
+                href={`#${heading.slug}`}
+                class="toc-link block text-sm py-1 text-text-muted hover:text-primary transition-colors"
+              >{heading.text}</a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </div>
+  </aside>
+)}
+
+<script>
+  const tocToggle = document.getElementById('toc-toggle');
+  const tocNav = document.getElementById('toc-nav');
+  if (tocToggle && tocNav) {
+    if (window.innerWidth < 1024) {
+      tocNav.classList.add('hidden');
+      tocToggle.setAttribute('aria-expanded', 'false');
+    }
+    tocToggle.addEventListener('click', () => {
+      if (window.innerWidth < 1024) {
+        tocNav.classList.toggle('hidden');
+        const expanded = !tocNav.classList.contains('hidden');
+        tocToggle.setAttribute('aria-expanded', String(expanded));
+      }
+    });
+  }
+
+  const tocLinks = document.querySelectorAll('.toc-link');
+  const headingEls = Array.from(tocLinks).map(link => {
+    const id = link.getAttribute('href')?.slice(1);
+    return id ? document.getElementById(id) : null;
+  }).filter(Boolean) as HTMLElement[];
+
+  const observer = new IntersectionObserver(
+    entries => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) {
+          tocLinks.forEach(l => l.classList.remove('text-primary', 'font-medium'));
+          const activeLink = document.querySelector(`.toc-link[href="#${entry.target.id}"]`);
+          activeLink?.classList.add('text-primary', 'font-medium');
+        }
+      }
+    },
+    { rootMargin: '-80px 0px -70% 0px' }
+  );
+
+  headingEls.forEach(el => observer.observe(el));
+</script>

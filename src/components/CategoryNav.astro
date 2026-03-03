@@ -1,0 +1,39 @@
+---
+interface Props {
+  current?: string;
+}
+
+const { current } = Astro.props;
+
+const categories = [
+  { slug: '시장분석', label: '시장분석' },
+  { slug: '종목분석', label: '종목분석' },
+  { slug: '투자전략', label: '투자전략' },
+  { slug: '경제기초', label: '경제기초' },
+];
+---
+
+<nav class="flex flex-wrap gap-2 mb-8" aria-label="카테고리 네비게이션">
+  <a
+    href="/"
+    class:list={[
+      "px-4 py-2 rounded-full text-sm font-medium transition-colors border",
+      !current
+        ? "bg-primary text-white border-primary"
+        : "bg-bg text-text-secondary border-border hover:border-primary hover:text-primary"
+    ]}
+  >전체</a>
+  {categories.map(cat => (
+    <a
+      href={`/category/${cat.slug}`}
+      class:list={[
+        "px-4 py-2 rounded-full text-sm font-medium transition-colors border",
+        current === cat.slug
+          ? "bg-primary text-white border-primary"
+          : "bg-bg text-text-secondary border-border hover:border-primary hover:text-primary"
+      ]}
+    >
+      {cat.label}
+    </a>
+  ))}
+</nav>

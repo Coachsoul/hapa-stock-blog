@@ -1,0 +1,51 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SubscribeForm from '../components/SubscribeForm.astro';
+---
+
+<BaseLayout title="소개" description="하파(HAPA) - 주식 투자 초보자를 위한 든든한 가이드. 매일 근거 기반 시장 분석을 제공합니다.">
+  <main class="flex-grow">
+    <div class="max-w-xl mx-auto px-6 py-16">
+      <h1 class="text-2xl font-extrabold text-text mb-6">안녕하세요, 하파입니다</h1>
+
+      <div class="text-text-secondary leading-relaxed space-y-4 mb-8">
+        <p>
+          저는 1000만 원으로 삼성전자가 20만 전자일 때 주식 투자를 시작했습니다.
+          처음에는 두렵고 불안했지만, 공부하고 경험을 쌓으며 투자의 즐거움을 알게 되었습니다.
+        </p>
+        <p>
+          <strong class="text-text">주식이 두려운 분들에게 힘과 용기를 드리고 싶습니다.</strong>
+          조금이라도 초보 투자자들에게 도움을 주고,
+          함께 공부하며 주식 부자가 되어보자는 마음으로 이 채널을 운영하고 있습니다.
+        </p>
+        <p>
+          매일 아침 시장을 분석하고, 여러분이 이해하기 쉬운 언어로 투자 전략을 전달합니다.
+          실제로 저 역시 투자를 하고 있기에, 항상 진솔하고 책임감 있는 정보를 약속드립니다.
+        </p>
+      </div>
+
+      <!-- 철학 -->
+      <div class="bg-bg-secondary rounded-xl p-6 mb-8">
+        <h3 class="font-bold text-text mb-4">하파의 투자 철학</h3>
+        <ul class="space-y-2 text-sm text-text-secondary">
+          <li><strong class="text-text">근거 기반:</strong> 모든 분석에 출처와 신뢰도를 명시합니다</li>
+          <li><strong class="text-text">정직함:</strong> 모르는 건 모른다고 말합니다. 확신이 없으면 [추론]으로 표기합니다</li>
+          <li><strong class="text-text">교육 중심:</strong> 물고기를 주는 게 아니라 낚시법을 알려드립니다</li>
+          <li><strong class="text-text">리스크 우선:</strong> 수익보다 리스크 관리를 먼저 생각합니다</li>
+        </ul>
+      </div>
+
+      <!-- 연락처 -->
+      <div class="bg-bg-secondary rounded-xl p-6 mb-10">
+        <h3 class="font-bold text-text mb-3">하파와 소통하기</h3>
+        <ul class="space-y-2 text-sm text-text-secondary">
+          <li>이메일: <a href="mailto:hapa_coach@naver.com" class="text-primary hover:underline">hapa_coach@naver.com</a></li>
+          <li><a href="/subscribe" class="text-primary hover:underline">무료 투자 노트 구독</a></li>
+          <li><a href="/vip" class="text-primary hover:underline">VIP 프리미엄 구독</a></li>
+        </ul>
+      </div>
+
+      <SubscribeForm variant="card" />
+    </div>
+  </main>
+</BaseLayout>
