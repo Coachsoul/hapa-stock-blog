@@ -8,6 +8,7 @@ import RelatedPosts from '../components/RelatedPosts.astro';
 import SocialShare from '../components/SocialShare.astro';
 import TrustBanner from '../components/TrustBanner.astro';
 import SubscribeForm from '../components/SubscribeForm.astro';
+import VipCta from '../components/VipCta.astro';
 
 interface Props {
   frontmatter: {
@@ -95,6 +96,7 @@ const articleSchema: Record<string, any> = {
           <slot />
         </div>
 
+        <VipCta />
         <TrustBanner variant="compact" />
         <SocialShare title={title} url={Astro.url.pathname} />
         <AuthorBio />

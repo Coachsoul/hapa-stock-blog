@@ -35,8 +35,36 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             <tr><td class="py-2.5 px-4 border-b border-border">리스크 관리 프레임워크</td><td class="text-center border-b border-border text-text-muted">-</td><td class="text-center border-b border-border bg-accent-light/50 text-primary">O</td></tr>
             <tr><td class="py-2.5 px-4 border-b border-border">워치리스트 (3~5종목)</td><td class="text-center border-b border-border text-text-muted">-</td><td class="text-center border-b border-border bg-accent-light/50 text-primary">O</td></tr>
             <tr><td class="py-2.5 px-4 border-b border-border">증권사 리포트 크로스체크</td><td class="text-center border-b border-border text-text-muted">-</td><td class="text-center border-b border-border bg-accent-light/50 text-primary">O</td></tr>
+            <tr><td class="py-2.5 px-4 border-b border-border font-semibold text-text">HAPA Flash 긴급 속보</td><td class="text-center border-b border-border text-text-muted">-</td><td class="text-center border-b border-border bg-accent-light/50 text-primary">O</td></tr>
           </tbody>
         </table>
+      </div>
+
+      <!-- HAPA Flash 소개 -->
+      <div class="bg-[#1a1020] border border-red-500/20 rounded-xl p-6 mb-10">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded bg-red-600 text-white text-xs font-bold tracking-wider">FLASH</span>
+          <h3 class="font-bold text-text">HAPA Flash 긴급 속보</h3>
+          <span class="text-xs text-text-muted">VIP 전용</span>
+        </div>
+        <p class="text-sm text-text-secondary leading-relaxed mb-3">
+          장중 중요 뉴스 발생 시, AI가 자동으로 감지하고 VIP 구독자에게
+          <strong class="text-text">긴급 투자 노트</strong>를 즉시 발송합니다.
+        </p>
+        <ul class="text-sm text-text-secondary space-y-2">
+          <li class="flex items-start gap-2">
+            <span class="text-red-400 mt-0.5">&#9889;</span>
+            <span>글로벌 뉴스 실시간 모니터링 (CNBC, MarketWatch, 네이버 등)</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-red-400 mt-0.5">&#9889;</span>
+            <span>AI 중요도 판단 — 전쟁, 금리, 실적 서프라이즈 등 긴급 뉴스만 필터링</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-red-400 mt-0.5">&#9889;</span>
+            <span>투자 시사점 + 행동 가이드 포함한 플래시 노트 즉시 발송</span>
+          </li>
+        </ul>
       </div>
 
       <!-- VIP 샘플 -->
@@ -87,11 +115,39 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         </div>
       </div>
 
-      <!-- CTA -->
-      <div class="bg-primary-light/50 border border-primary/20 rounded-xl p-8 text-center mb-6">
-        <h3 class="text-lg font-bold text-text mb-2">VIP 구독 시작하기</h3>
-        <p class="text-sm text-text-secondary mb-4">매일 아침 프리미엄 투자 전략을 받아보세요.</p>
-        <a href="mailto:hapa_coach@naver.com?subject=VIP 구독 문의" class="inline-flex items-center justify-center h-11 px-8 rounded-lg bg-primary text-white font-bold hover:bg-primary-dark transition-colors">
+      <!-- 7일 무료 체험 CTA -->
+      <div class="bg-gradient-to-br from-[#1a1520] to-[#0f0a1a] border border-accent/20 rounded-xl p-8 text-center mb-6">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent-light border border-accent/20 text-vip-gold text-sm font-bold mb-4">
+          7일 무료 체험
+        </div>
+        <h3 class="text-xl font-extrabold text-text mb-2">VIP를 직접 경험해보세요</h3>
+        <p class="text-sm text-text-secondary mb-6 leading-relaxed">
+          7일간 VIP 투자 노트 + HAPA Flash 속보를 무료로 받아보세요.<br/>
+          카드 등록 없이 이메일만으로 시작할 수 있습니다.
+        </p>
+
+        <form class="flex flex-col sm:flex-row gap-2 max-w-md mx-auto mb-3" id="trial-form">
+          <input
+            type="email"
+            name="email"
+            placeholder="이메일 주소를 입력하세요"
+            required
+            autocomplete="email"
+            class="flex-1 px-4 py-2.5 rounded-lg border border-border bg-bg text-sm text-text placeholder:text-text-muted focus:outline-none focus:ring-2 focus:ring-accent/30 focus:border-accent"
+          />
+          <button type="submit" class="px-6 py-2.5 rounded-lg bg-gradient-to-r from-amber-500 to-amber-600 text-white text-sm font-bold hover:from-amber-600 hover:to-amber-700 transition-all whitespace-nowrap">
+            <span class="trial-btn-text">7일 무료 시작</span>
+            <span class="trial-btn-loading" hidden>처리 중...</span>
+          </button>
+        </form>
+        <p class="hidden text-sm" id="trial-message"></p>
+        <p class="text-xs text-text-muted">체험 종료 후 자동으로 무료 구독으로 전환됩니다. 별도 해지 불필요.</p>
+      </div>
+
+      <!-- 기존 VIP 문의 -->
+      <div class="bg-primary-light/50 border border-primary/20 rounded-xl p-6 text-center mb-6">
+        <p class="text-sm text-text-secondary mb-3">이미 무료 체험을 사용하셨거나 바로 VIP를 시작하고 싶으신가요?</p>
+        <a href="mailto:hapa_coach@naver.com?subject=VIP 구독 문의" class="inline-flex items-center justify-center h-10 px-6 rounded-lg bg-primary text-white font-bold text-sm hover:bg-primary-dark transition-colors">
           VIP 구독 문의
         </a>
       </div>
@@ -101,4 +157,50 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </p>
     </div>
   </main>
+
+  <script>
+    const trialForm = document.getElementById('trial-form') as HTMLFormElement;
+    const trialMsg = document.getElementById('trial-message') as HTMLElement;
+
+    trialForm?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = new FormData(trialForm).get('email') as string;
+      const btnText = trialForm.querySelector('.trial-btn-text') as HTMLElement;
+      const btnLoading = trialForm.querySelector('.trial-btn-loading') as HTMLElement;
+      const btn = trialForm.querySelector('button') as HTMLButtonElement;
+
+      btn.disabled = true;
+      btnText.hidden = true;
+      btnLoading.hidden = false;
+
+      try {
+        const res = await fetch('/api/trial', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email }),
+        });
+        const data = await res.json();
+
+        trialMsg.hidden = false;
+        trialMsg.classList.remove('hidden');
+        if (res.ok) {
+          trialMsg.textContent = data.message || 'VIP 7일 무료 체험이 시작되었습니다!';
+          trialMsg.className = 'text-sm text-emerald-400';
+          trialForm.reset();
+        } else {
+          trialMsg.textContent = data.error || '처리 중 문제가 발생했습니다.';
+          trialMsg.className = 'text-sm text-red-400';
+        }
+      } catch {
+        trialMsg.hidden = false;
+        trialMsg.classList.remove('hidden');
+        trialMsg.textContent = '서버에 연결할 수 없습니다. 잠시 후 다시 시도해주세요.';
+        trialMsg.className = 'text-sm text-red-400';
+      } finally {
+        btn.disabled = false;
+        btnText.hidden = false;
+        btnLoading.hidden = true;
+      }
+    });
+  </script>
 </BaseLayout>

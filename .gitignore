@@ -19,3 +19,5 @@ Thumbs.db
 .vscode/
 .idea/
 downloaded_stitch.html
+
+.vercel

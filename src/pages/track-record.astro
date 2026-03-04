@@ -1,0 +1,175 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="HAPA 적중률 트래커" description="하파의 시장 예측 적중률을 투명하게 공개합니다. AI 분석의 실제 성과를 확인하세요.">
+  <main class="flex-grow">
+    <div class="max-w-2xl mx-auto px-6 py-16">
+      <!-- 헤더 -->
+      <div class="text-center mb-12">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-sm font-bold mb-4">
+          Track Record
+        </div>
+        <h1 class="text-2xl font-extrabold text-text mb-3">예측 적중률 공개</h1>
+        <p class="text-text-secondary leading-relaxed">
+          하파의 시장 분석 예측을 <strong class="text-text">투명하게</strong> 기록하고<br/>
+          실제 결과를 공개합니다.
+        </p>
+      </div>
+
+      <!-- 적중률 요약 (API에서 동적 로드) -->
+      <div class="bg-bg-secondary rounded-xl p-6 mb-10" id="statsSection">
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center" id="statsGrid">
+          <div>
+            <div class="text-2xl font-extrabold text-emerald-400" id="hitRateDisplay">-</div>
+            <div class="text-xs text-text-muted mt-1">적중률</div>
+          </div>
+          <div>
+            <div class="text-2xl font-extrabold text-text" id="resolvedDisplay">-</div>
+            <div class="text-xs text-text-muted mt-1">결과 확인</div>
+          </div>
+          <div>
+            <div class="text-2xl font-extrabold text-text" id="hitsDisplay">-</div>
+            <div class="text-xs text-text-muted mt-1">적중</div>
+          </div>
+          <div>
+            <div class="text-2xl font-extrabold text-text" id="totalDisplay">-</div>
+            <div class="text-xs text-text-muted mt-1">전체 예측</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 카테고리별 적중률 -->
+      <div class="mb-10">
+        <h3 class="text-lg font-bold text-text mb-4">카테고리별 성과</h3>
+        <div class="grid grid-cols-2 gap-3" id="categoryGrid">
+          <div class="bg-bg-secondary rounded-lg p-4 text-center">
+            <div class="text-xs text-text-muted mb-1">시장 전망</div>
+            <div class="text-xl font-bold text-text" id="catMarket">-</div>
+          </div>
+          <div class="bg-bg-secondary rounded-lg p-4 text-center">
+            <div class="text-xs text-text-muted mb-1">섹터 분석</div>
+            <div class="text-xl font-bold text-text" id="catSector">-</div>
+          </div>
+          <div class="bg-bg-secondary rounded-lg p-4 text-center">
+            <div class="text-xs text-text-muted mb-1">종목 예측</div>
+            <div class="text-xl font-bold text-text" id="catStock">-</div>
+          </div>
+          <div class="bg-bg-secondary rounded-lg p-4 text-center">
+            <div class="text-xs text-text-muted mb-1">이벤트 예측</div>
+            <div class="text-xl font-bold text-text" id="catEvent">-</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 최근 예측 기록 -->
+      <div class="mb-10">
+        <h3 class="text-lg font-bold text-text mb-4">최근 예측 기록</h3>
+        <div class="space-y-2" id="recentPredictions">
+          <p class="text-sm text-text-muted">데이터를 불러오는 중...</p>
+        </div>
+      </div>
+
+      <!-- 투명성 설명 -->
+      <div class="bg-bg-secondary rounded-xl p-6 mb-10">
+        <h3 class="font-bold text-text mb-3">적중률 산정 기준</h3>
+        <div class="space-y-3 text-sm text-text-secondary">
+          <div class="flex items-start gap-2">
+            <span class="text-emerald-400 font-bold flex-shrink-0">O 적중</span>
+            <span>예측 방향과 실제 결과가 일치한 경우</span>
+          </div>
+          <div class="flex items-start gap-2">
+            <span class="text-amber-400 font-bold flex-shrink-0">△ 부분</span>
+            <span>방향은 맞았으나 강도/타이밍이 다른 경우 (0.5건으로 계산)</span>
+          </div>
+          <div class="flex items-start gap-2">
+            <span class="text-red-400 font-bold flex-shrink-0">X 빗나감</span>
+            <span>예측 방향과 실제 결과가 다른 경우</span>
+          </div>
+        </div>
+        <p class="text-xs text-text-muted mt-4 italic">
+          * 모든 예측은 사전에 기록되며, 사후에 결과를 반영합니다. 과거 예측을 수정하거나 삭제하지 않습니다.
+        </p>
+      </div>
+
+      <!-- CTA -->
+      <div class="bg-gradient-to-br from-[#0f1a0f] to-[#0a0f1a] border border-emerald-500/20 rounded-xl p-8 text-center">
+        <h3 class="text-lg font-bold text-text mb-2">검증된 분석을 받아보세요</h3>
+        <p class="text-sm text-text-secondary mb-5">매일 아침, 근거 기반 시장 분석과 투자 전략을 이메일로 전달합니다.</p>
+        <a href="/subscribe" class="inline-flex items-center justify-center h-11 px-8 rounded-lg bg-gradient-to-r from-emerald-600 to-emerald-700 text-white font-bold hover:from-emerald-700 hover:to-emerald-800 transition-all">
+          무료 구독 시작하기
+        </a>
+        <p class="text-xs text-text-muted mt-3">
+          또는 <a href="/vip" class="text-primary hover:underline">VIP 구독</a>으로 실전 투자 전략까지 받아보세요.
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    async function loadTrackRecord() {
+      try {
+        const apiBase = window.location.hostname === 'localhost' ? 'http://localhost:3000' : '';
+        const [statsRes, predsRes] = await Promise.all([
+          fetch(`${apiBase}/api/predictions/stats`),
+          fetch(`${apiBase}/api/predictions?limit=20`),
+        ]);
+
+        if (statsRes.ok) {
+          const stats = await statsRes.json();
+          document.getElementById('hitRateDisplay').textContent = stats.resolved > 0 ? `${stats.hitRate}%` : '-';
+          document.getElementById('resolvedDisplay').textContent = stats.resolved;
+          document.getElementById('hitsDisplay').textContent = stats.hits + (stats.partials > 0 ? ` (+${stats.partials}△)` : '');
+          document.getElementById('totalDisplay').textContent = stats.total;
+
+          // 카테고리별
+          const catMap = {};
+          stats.byCategory?.forEach(c => {
+            const rate = c.total > 0 ? ((c.hits + c.partials * 0.5) / c.total * 100).toFixed(0) + '%' : '-';
+            catMap[c.category] = `${rate} (${c.total}건)`;
+          });
+          const setCat = (id, cat) => {
+            const el = document.getElementById(id);
+            if (el && catMap[cat]) el.textContent = catMap[cat];
+          };
+          setCat('catMarket', 'market');
+          setCat('catSector', 'sector');
+          setCat('catStock', 'stock');
+          setCat('catEvent', 'event');
+        }
+
+        if (predsRes.ok) {
+          const preds = await predsRes.json();
+          const resolved = preds.filter(p => p.outcome && p.outcome !== 'pending');
+          const container = document.getElementById('recentPredictions');
+
+          if (resolved.length === 0) {
+            container.innerHTML = '<p class="text-sm text-text-muted">아직 기록된 예측이 없습니다. 서비스 운영 후 업데이트됩니다.</p>';
+            return;
+          }
+
+          const outcomeIcon = { hit: 'O', miss: 'X', partial: '△' };
+          const outcomeColor = { hit: 'text-emerald-400', miss: 'text-red-400', partial: 'text-amber-400' };
+          const catLabels = { market: '시장', sector: '섹터', stock: '종목', event: '이벤트' };
+
+          container.innerHTML = resolved.slice(0, 20).map(p => `
+            <div class="flex items-center gap-3 p-3 bg-bg-secondary rounded-lg">
+              <span class="flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full ${
+                p.outcome === 'hit' ? 'bg-emerald-500/10' : p.outcome === 'miss' ? 'bg-red-500/10' : 'bg-amber-500/10'
+              } ${outcomeColor[p.outcome]} font-bold text-sm">${outcomeIcon[p.outcome]}</span>
+              <div class="flex-1 min-w-0">
+                <p class="text-sm font-medium text-text truncate">${p.prediction}</p>
+                <p class="text-xs text-text-muted">${p.date} · ${catLabels[p.category] || p.category}${p.outcome_note ? ' · ' + p.outcome_note : ''}</p>
+              </div>
+            </div>
+          `).join('');
+        }
+      } catch {
+        document.getElementById('recentPredictions').innerHTML =
+          '<p class="text-sm text-text-muted">데이터를 불러올 수 없습니다. 서비스 운영 후 업데이트됩니다.</p>';
+      }
+    }
+
+    loadTrackRecord();
+  </script>
+</BaseLayout>

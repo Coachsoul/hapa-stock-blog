@@ -50,8 +50,7 @@ const { variant = 'card' } = Astro.props;
     btnLoading.hidden = false;
 
     try {
-      const apiUrl = import.meta.env.PUBLIC_API_URL || '';
-      const res = await fetch(`${apiUrl}/api/subscribers`, {
+      const res = await fetch('/api/subscribe', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, tier: 'free' }),

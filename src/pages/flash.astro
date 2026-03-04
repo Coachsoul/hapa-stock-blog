@@ -1,0 +1,121 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="HAPA Flash 속보" description="HAPA Flash 긴급 속보 서비스 — AI가 감지한 긴급 뉴스에 대한 실시간 투자 노트를 VIP 구독자에게 즉시 발송합니다.">
+  <main class="flex-grow">
+    <div class="max-w-2xl mx-auto px-6 py-16">
+      <!-- 헤더 -->
+      <div class="text-center mb-12">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-500/10 border border-red-500/20 text-red-400 text-sm font-bold mb-4">
+          <span class="w-2 h-2 bg-red-500 rounded-full animate-pulse"></span> HAPA Flash
+        </div>
+        <h1 class="text-2xl font-extrabold text-text mb-3">긴급 속보 서비스</h1>
+        <p class="text-text-secondary leading-relaxed">
+          장중 중요 뉴스 발생 시, AI가 <strong class="text-text">15분 이내</strong>에 감지하고<br/>
+          VIP 구독자에게 투자 노트를 즉시 발송합니다.
+        </p>
+      </div>
+
+      <!-- 작동 방식 -->
+      <div class="bg-bg-secondary rounded-xl p-6 mb-10">
+        <h3 class="font-bold text-text mb-4">작동 방식</h3>
+        <div class="space-y-4">
+          <div class="flex items-start gap-3">
+            <span class="flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full bg-red-500/10 text-red-400 font-bold text-sm">1</span>
+            <div>
+              <p class="font-semibold text-text text-sm">글로벌 뉴스 실시간 모니터링</p>
+              <p class="text-xs text-text-muted mt-0.5">CNBC, MarketWatch, 네이버 금융 등 10개+ 소스를 15분 간격으로 스캔</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-3">
+            <span class="flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full bg-amber-500/10 text-amber-400 font-bold text-sm">2</span>
+            <div>
+              <p class="font-semibold text-text text-sm">AI 중요도 판단</p>
+              <p class="text-xs text-text-muted mt-0.5">전쟁, 금리 결정, 실적 서프라이즈, 서킷브레이커 등 긴급 뉴스만 필터링</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-3">
+            <span class="flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full bg-primary/10 text-primary font-bold text-sm">3</span>
+            <div>
+              <p class="font-semibold text-text text-sm">플래시 노트 자동 생성</p>
+              <p class="text-xs text-text-muted mt-0.5">핵심 요약 + 투자 시사점 + 행동 가이드를 300~500자로 즉시 작성</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-3">
+            <span class="flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full bg-emerald-500/10 text-emerald-400 font-bold text-sm">4</span>
+            <div>
+              <p class="font-semibold text-text text-sm">VIP 전용 즉시 발송</p>
+              <p class="text-xs text-text-muted mt-0.5">관리자 검증 후 VIP 구독자에게 이메일로 즉시 발송</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Flash 실적 예시 -->
+      <div class="mb-10">
+        <h3 class="text-lg font-bold text-text mb-4">Flash 속보 실적</h3>
+        <p class="text-sm text-text-muted mb-4">VIP 구독자들은 이런 상황에서 빠르게 대응했습니다.</p>
+
+        <div class="space-y-3">
+          <div class="border border-red-500/20 rounded-lg p-4 bg-red-500/5">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="text-[10px] font-bold px-1.5 py-0.5 rounded bg-red-600 text-white">FLASH</span>
+              <span class="text-xs text-text-muted">예시 시나리오</span>
+            </div>
+            <p class="text-sm font-semibold text-text mb-1">Fed 긴급 금리 인상 발표</p>
+            <p class="text-xs text-text-secondary">일반 투자자 인지 시간: 뉴스 보도 후 1~2시간 → HAPA Flash VIP: 15분 이내 투자 노트 수신</p>
+          </div>
+
+          <div class="border border-amber-500/20 rounded-lg p-4 bg-amber-500/5">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="text-[10px] font-bold px-1.5 py-0.5 rounded bg-amber-600 text-white">FLASH</span>
+              <span class="text-xs text-text-muted">예시 시나리오</span>
+            </div>
+            <p class="text-sm font-semibold text-text mb-1">NVIDIA 실적 서프라이즈 +20%</p>
+            <p class="text-xs text-text-secondary">한국 반도체주 영향 분석 + 매수 시점 가이드를 시장 반응 전에 확보</p>
+          </div>
+
+          <div class="border border-primary/20 rounded-lg p-4 bg-primary/5">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="text-[10px] font-bold px-1.5 py-0.5 rounded bg-primary text-white">FLASH</span>
+              <span class="text-xs text-text-muted">예시 시나리오</span>
+            </div>
+            <p class="text-sm font-semibold text-text mb-1">중동 지정학 리스크 급변</p>
+            <p class="text-xs text-text-secondary">유가/방산주 영향 + 포트폴리오 방어 전략을 즉시 전달</p>
+          </div>
+        </div>
+
+        <p class="text-xs text-text-muted mt-3 italic">
+          * 위 시나리오는 Flash 서비스의 활용 예시입니다. 실제 발송 기록은 서비스 운영 후 업데이트됩니다.
+        </p>
+      </div>
+
+      <!-- 모니터링 범위 -->
+      <div class="bg-bg-secondary rounded-xl p-6 mb-10">
+        <h3 class="font-bold text-text mb-3">모니터링 뉴스 소스</h3>
+        <div class="grid grid-cols-2 gap-2 text-sm text-text-secondary">
+          <div class="flex items-center gap-2"><span class="text-primary">&#x2713;</span> CNBC Markets</div>
+          <div class="flex items-center gap-2"><span class="text-primary">&#x2713;</span> MarketWatch</div>
+          <div class="flex items-center gap-2"><span class="text-primary">&#x2713;</span> Google News (AI/반도체)</div>
+          <div class="flex items-center gap-2"><span class="text-primary">&#x2713;</span> Google News (지정학)</div>
+          <div class="flex items-center gap-2"><span class="text-primary">&#x2713;</span> 네이버 금융</div>
+          <div class="flex items-center gap-2"><span class="text-primary">&#x2713;</span> 한국 RSS 4개 채널</div>
+        </div>
+        <p class="text-xs text-text-muted mt-3">월~금 07:00~22:00 (KST), 15분 간격 자동 모니터링</p>
+      </div>
+
+      <!-- CTA -->
+      <div class="bg-gradient-to-br from-[#1a1020] to-[#0f0a1a] border border-red-500/20 rounded-xl p-8 text-center">
+        <h3 class="text-lg font-bold text-text mb-2">Flash 속보를 받아보세요</h3>
+        <p class="text-sm text-text-secondary mb-5">VIP 구독자 전용 서비스입니다.</p>
+        <a href="/vip" class="inline-flex items-center justify-center h-11 px-8 rounded-lg bg-gradient-to-r from-red-600 to-red-700 text-white font-bold hover:from-red-700 hover:to-red-800 transition-all">
+          VIP 구독으로 Flash 받기
+        </a>
+        <p class="text-xs text-text-muted mt-3">
+          또는 <a href="/subscribe" class="text-primary hover:underline">무료 구독</a>부터 시작해보세요.
+        </p>
+      </div>
+    </div>
+  </main>
+</BaseLayout>
