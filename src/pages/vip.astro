@@ -120,8 +120,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent-light border border-accent/20 text-vip-gold text-sm font-bold mb-4">
           7일 무료 체험
         </div>
-        <h3 class="text-xl font-extrabold text-text mb-2">VIP를 직접 경험해보세요</h3>
-        <p class="text-sm text-text-secondary mb-6 leading-relaxed">
+        <h3 class="text-xl font-extrabold text-white mb-2">VIP를 직접 경험해보세요</h3>
+        <p class="text-sm text-gray-300 mb-6 leading-relaxed">
           7일간 VIP 투자 노트 + HAPA Flash 속보를 무료로 받아보세요.<br/>
           카드 등록 없이 이메일만으로 시작할 수 있습니다.
         </p>
@@ -133,7 +133,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             placeholder="이메일 주소를 입력하세요"
             required
             autocomplete="email"
-            class="flex-1 px-4 py-2.5 rounded-lg border border-border bg-bg text-sm text-text placeholder:text-text-muted focus:outline-none focus:ring-2 focus:ring-accent/30 focus:border-accent"
+            class="flex-1 px-4 py-2.5 rounded-lg border border-gray-600 bg-white/10 text-sm text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-accent/30 focus:border-accent"
           />
           <button type="submit" class="px-6 py-2.5 rounded-lg bg-gradient-to-r from-amber-500 to-amber-600 text-white text-sm font-bold hover:from-amber-600 hover:to-amber-700 transition-all whitespace-nowrap">
             <span class="trial-btn-text">7일 무료 시작</span>
@@ -141,7 +141,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           </button>
         </form>
         <p class="hidden text-sm" id="trial-message"></p>
-        <p class="text-xs text-text-muted">체험 종료 후 자동으로 무료 구독으로 전환됩니다. 별도 해지 불필요.</p>
+        <p class="text-xs text-gray-400">체험 종료 후 자동으로 무료 구독으로 전환됩니다. 별도 해지 불필요.</p>
       </div>
 
       <!-- 기존 VIP 문의 -->
