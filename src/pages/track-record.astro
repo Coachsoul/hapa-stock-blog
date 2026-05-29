@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+return Astro.redirect('/');  // 유료 서비스 — 정식 오픈 전까지 숨김 (이 줄 제거 시 복구)
 ---
 
 <BaseLayout title="HAPA 적중률 트래커" description="하파의 시장 예측 적중률을 투명하게 공개합니다. AI 분석의 실제 성과를 확인하세요.">
@@ -94,13 +95,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
       <!-- CTA -->
       <div class="bg-gradient-to-br from-[#0f1a0f] to-[#0a0f1a] border border-emerald-500/20 rounded-xl p-8 text-center">
-        <h3 class="text-lg font-bold text-text mb-2">검증된 분석을 받아보세요</h3>
-        <p class="text-sm text-text-secondary mb-5">매일 아침, 근거 기반 시장 분석과 투자 전략을 이메일로 전달합니다.</p>
+        <h3 class="text-lg font-bold text-white mb-2">검증된 분석을 받아보세요</h3>
+        <p class="text-sm text-gray-300 mb-5">매일 아침, 근거 기반 시장 분석과 투자 전략을 이메일로 전달합니다.</p>
         <a href="/subscribe" class="inline-flex items-center justify-center h-11 px-8 rounded-lg bg-gradient-to-r from-emerald-600 to-emerald-700 text-white font-bold hover:from-emerald-700 hover:to-emerald-800 transition-all">
           무료 구독 시작하기
         </a>
-        <p class="text-xs text-text-muted mt-3">
-          또는 <a href="/vip" class="text-primary hover:underline">VIP 구독</a>으로 실전 투자 전략까지 받아보세요.
+        <p class="text-xs text-gray-400 mt-3">
+          또는 <a href="/vip" class="text-emerald-400 hover:underline">VIP 구독</a>으로 실전 투자 전략까지 받아보세요.
         </p>
       </div>
     </div>
@@ -165,8 +166,23 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           `).join('');
         }
       } catch {
-        document.getElementById('recentPredictions').innerHTML =
-          '<p class="text-sm text-text-muted">데이터를 불러올 수 없습니다. 서비스 운영 후 업데이트됩니다.</p>';
+        // API 접근 불가 시 (Vercel 프로덕션 등) 안내 표시
+        document.getElementById('recentPredictions').innerHTML = `
+          <div class="text-center py-8">
+            <span class="material-symbols-outlined text-4xl text-text-muted mb-2">hourglass_empty</span>
+            <p class="text-sm text-text-secondary font-medium mb-1">적중률 데이터 준비 중</p>
+            <p class="text-xs text-text-muted">서비스 운영이 시작되면 예측 기록과 적중률이 이곳에 투명하게 공개됩니다.</p>
+          </div>`;
+        // 통계 영역도 준비 중 표시
+        const statsSection = document.getElementById('statsSection');
+        if (statsSection) {
+          statsSection.innerHTML = `
+            <div class="text-center py-4">
+              <p class="text-sm text-text-muted">서비스 운영 시작 후 실시간 적중률 통계가 표시됩니다.</p>
+            </div>`;
+        }
+        const categoryGrid = document.getElementById('categoryGrid');
+        if (categoryGrid) categoryGrid.style.display = 'none';
       }
     }
 

@@ -1,13 +1,11 @@
 ---
 const currentPath = Astro.url.pathname;
 
+// 유료 서비스(구독·VIP·적중률) 링크는 정식 오픈 전까지 숨김 — 페이지 파일은 보존
 const navItems = [
   { href: '/', label: '홈' },
   { href: '/category/시장분석', label: '시장분석' },
   { href: '/category/종목분석', label: '종목분석' },
-  { href: '/subscribe', label: '구독' },
-  { href: '/vip', label: 'VIP' },
-  { href: '/track-record', label: '적중률' },
   { href: '/about', label: '소개' },
 ];
 ---

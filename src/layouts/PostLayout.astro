@@ -6,9 +6,6 @@ import TableOfContents from '../components/TableOfContents.astro';
 import AuthorBio from '../components/AuthorBio.astro';
 import RelatedPosts from '../components/RelatedPosts.astro';
 import SocialShare from '../components/SocialShare.astro';
-import TrustBanner from '../components/TrustBanner.astro';
-import SubscribeForm from '../components/SubscribeForm.astro';
-import VipCta from '../components/VipCta.astro';
 
 interface Props {
   frontmatter: {
@@ -96,11 +93,9 @@ const articleSchema: Record<string, any> = {
           <slot />
         </div>
 
-        <VipCta />
-        <TrustBanner variant="compact" />
+        {/* VipCta·SubscribeForm·TrustBanner(유료 구독 유도)는 정식 오픈 전까지 숨김 */}
         <SocialShare title={title} url={Astro.url.pathname} />
         <AuthorBio />
-        <SubscribeForm variant="card" />
         <RelatedPosts currentSlug={slug} tags={tags} category={category} />
       </article>
     </main>

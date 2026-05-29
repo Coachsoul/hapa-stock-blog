@@ -1,8 +1,9 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+return Astro.redirect('/');  // Flash(실시간) 유료 연계 — 정식 오픈 전까지 숨김 (이 줄 제거 시 복구)
 ---
 
-<BaseLayout title="HAPA Flash 속보" description="HAPA Flash 긴급 속보 서비스 — AI가 감지한 긴급 뉴스에 대한 실시간 투자 노트를 VIP 구독자에게 즉시 발송합니다.">
+<BaseLayout title="HAPA Flash 장중 투자 분석" description="HAPA Flash — 장중 주요 뉴스 발생 시 AI가 투자 시사점을 분석하여 VIP 구독자에게 행동 가이드와 함께 발송합니다.">
   <main class="flex-grow">
     <div class="max-w-2xl mx-auto px-6 py-16">
       <!-- 헤더 -->
@@ -10,10 +11,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-500/10 border border-red-500/20 text-red-400 text-sm font-bold mb-4">
           <span class="w-2 h-2 bg-red-500 rounded-full animate-pulse"></span> HAPA Flash
         </div>
-        <h1 class="text-2xl font-extrabold text-text mb-3">긴급 속보 서비스</h1>
+        <h1 class="text-2xl font-extrabold text-text mb-3">장중 투자 분석 서비스</h1>
         <p class="text-text-secondary leading-relaxed">
-          장중 중요 뉴스 발생 시, AI가 <strong class="text-text">15분 이내</strong>에 감지하고<br/>
-          VIP 구독자에게 투자 노트를 즉시 발송합니다.
+          장중 주요 뉴스 발생 시, AI가 <strong class="text-text">투자 시사점을 분석</strong>하고<br/>
+          VIP 구독자에게 행동 가이드와 함께 발송합니다.
         </p>
       </div>
 
@@ -24,7 +25,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <div class="flex items-start gap-3">
             <span class="flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full bg-red-500/10 text-red-400 font-bold text-sm">1</span>
             <div>
-              <p class="font-semibold text-text text-sm">글로벌 뉴스 실시간 모니터링</p>
+              <p class="font-semibold text-text text-sm">글로벌 주요 뉴스 모니터링</p>
               <p class="text-xs text-text-muted mt-0.5">CNBC, MarketWatch, 네이버 금융 등 10개+ 소스를 15분 간격으로 스캔</p>
             </div>
           </div>
@@ -32,7 +33,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             <span class="flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full bg-amber-500/10 text-amber-400 font-bold text-sm">2</span>
             <div>
               <p class="font-semibold text-text text-sm">AI 중요도 판단</p>
-              <p class="text-xs text-text-muted mt-0.5">전쟁, 금리 결정, 실적 서프라이즈, 서킷브레이커 등 긴급 뉴스만 필터링</p>
+              <p class="text-xs text-text-muted mt-0.5">전쟁, 금리 결정, 실적 서프라이즈, 서킷브레이커 등 시장 영향 큰 이벤트만 선별</p>
             </div>
           </div>
           <div class="flex items-start gap-3">
@@ -54,8 +55,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
       <!-- Flash 실적 예시 -->
       <div class="mb-10">
-        <h3 class="text-lg font-bold text-text mb-4">Flash 속보 실적</h3>
-        <p class="text-sm text-text-muted mb-4">VIP 구독자들은 이런 상황에서 빠르게 대응했습니다.</p>
+        <h3 class="text-lg font-bold text-text mb-4">Flash 활용 시나리오</h3>
+        <p class="text-sm text-text-muted mb-4">이런 상황에서 투자 판단에 도움을 드립니다.</p>
 
         <div class="space-y-3">
           <div class="border border-red-500/20 rounded-lg p-4 bg-red-500/5">
@@ -64,7 +65,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
               <span class="text-xs text-text-muted">예시 시나리오</span>
             </div>
             <p class="text-sm font-semibold text-text mb-1">Fed 긴급 금리 인상 발표</p>
-            <p class="text-xs text-text-secondary">일반 투자자 인지 시간: 뉴스 보도 후 1~2시간 → HAPA Flash VIP: 15분 이내 투자 노트 수신</p>
+            <p class="text-xs text-text-secondary">뉴스의 투자 시사점 분석 + 포트폴리오 대응 가이드를 함께 제공</p>
           </div>
 
           <div class="border border-amber-500/20 rounded-lg p-4 bg-amber-500/5">
@@ -73,7 +74,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
               <span class="text-xs text-text-muted">예시 시나리오</span>
             </div>
             <p class="text-sm font-semibold text-text mb-1">NVIDIA 실적 서프라이즈 +20%</p>
-            <p class="text-xs text-text-secondary">한국 반도체주 영향 분석 + 매수 시점 가이드를 시장 반응 전에 확보</p>
+            <p class="text-xs text-text-secondary">한국 반도체주 영향 분석 + 매수/관망 판단 가이드 제공</p>
           </div>
 
           <div class="border border-primary/20 rounded-lg p-4 bg-primary/5">
@@ -107,7 +108,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
       <!-- CTA -->
       <div class="bg-gradient-to-br from-[#1a1020] to-[#0f0a1a] border border-red-500/20 rounded-xl p-8 text-center">
-        <h3 class="text-lg font-bold text-text mb-2">Flash 속보를 받아보세요</h3>
+        <h3 class="text-lg font-bold text-text mb-2">Flash 분석을 받아보세요</h3>
         <p class="text-sm text-text-secondary mb-5">VIP 구독자 전용 서비스입니다.</p>
         <a href="/vip" class="inline-flex items-center justify-center h-11 px-8 rounded-lg bg-gradient-to-r from-red-600 to-red-700 text-white font-bold hover:from-red-700 hover:to-red-800 transition-all">
           VIP 구독으로 Flash 받기

@@ -1,6 +1,5 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import SubscribeForm from '../components/SubscribeForm.astro';
 ---
 
 <BaseLayout title="소개" description="하파(HAPA) - 주식 투자 초보자를 위한 든든한 가이드. 매일 근거 기반 시장 분석을 제공합니다.">
@@ -38,16 +37,31 @@ import SubscribeForm from '../components/SubscribeForm.astro';
       </div>
 
       <!-- 연락처 -->
-      <div class="bg-bg-secondary rounded-xl p-6 mb-10">
+      <div class="bg-bg-secondary rounded-xl p-6 mb-6">
         <h3 class="font-bold text-text mb-3">하파와 소통하기</h3>
         <ul class="space-y-2 text-sm text-text-secondary">
           <li>이메일: <a href="mailto:hapa_coach@naver.com" class="text-primary hover:underline">hapa_coach@naver.com</a></li>
+          <li>전화: 050-5041-0045</li>
           <li><a href="/subscribe" class="text-primary hover:underline">무료 투자 노트 구독</a></li>
           <li><a href="/vip" class="text-primary hover:underline">VIP 프리미엄 구독</a></li>
         </ul>
       </div>
 
-      <SubscribeForm variant="card" />
+      <!-- 사업자 정보 -->
+      <div class="bg-bg-secondary rounded-xl p-6 mb-10">
+        <h3 class="font-bold text-text mb-3">사업자 정보</h3>
+        <ul class="space-y-1.5 text-sm text-text-secondary">
+          <li>상호명: 코치소울</li>
+          <li>대표자명: 박세진</li>
+          <li>사업자등록번호: 430-02-01747</li>
+          <li>통신판매업신고: 2020-인천계양-0356</li>
+          <li>주소: 인천광역시 서구 이음1로 173</li>
+          <li>연락처: 050-5041-0045</li>
+          <li>이메일: <a href="mailto:hapa_coach@naver.com" class="text-primary hover:underline">hapa_coach@naver.com</a></li>
+        </ul>
+      </div>
+
+      {/* SubscribeForm(유료/구독 유도)은 정식 오픈 전까지 숨김 */}
     </div>
   </main>
 </BaseLayout>
